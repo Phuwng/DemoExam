@@ -1,0 +1,142 @@
+I. Kiến thức về Mô hình OSI và Thiết bị mạng
+1.	7 tầng của mô hình OSI lần lượt (từ dưới lên) là?
+o	a. Physical - Datalink - Network - Transport - Session - Presentation - Application
+2.	Thứ tự từ trên xuống dưới trong mô hình tham chiếu OSI là?
+o	c. Session - Transport - Network - Datalink - Physical 
+3.	Mô hình tham chiếu OSI có bao nhiêu lớp (layer)?
+o	a. 7
+4.	Thiết bị Hub thông thường nằm ở tầng nào của mô hình OSI?
+o	b. Tầng 1 (Physical)
+5.	Thiết bị Repeater nằm ở tầng nào của mô hình OSI?
+o	b. Tầng 1 (Physical)
+6.	Thiết bị Bridge nằm ở tầng nào của mô hình OSI?
+o	d. Tầng 2 (Data Link)
+7.	Thiết bị Switch thông thường nằm ở tầng nào của mô hình OSI?
+o	c. Tầng 2 (Data Link)
+8.	Thiết bị Router thông thường nằm ở tầng nào của mô hình OSI?
+o	c. Tầng 3 (Network)
+9.	Phát biểu nào sau đây về Switch là đúng nhất?
+o	a. Sử dụng địa chỉ vật lý và hoạt động tại tầng Data Link của mô hình OSI.
+10.	Tầng nào trong mô hình OSI có chức năng định tuyến giữa các mạng?
+o	c. Network
+11.	Khả năng định tuyến trên hệ thống mạng được thực hiện bởi thiết bị nào?
+o	a. Router
+12.	Thiết bị mạng nào dùng để nối các mạng và kiểm soát được gói tin broadcast?
+o	d. Router
+13.	Trong mô hình OSI, lớp nào trong quá trình đóng gói dữ liệu có kèm theo IP HEADER?
+o	d. Network
+________________________________________
+II. Đơn vị dữ liệu (PDU) và Quá trình đóng gói
+14.	Đơn vị dữ liệu (PDU) của các giao thức trong mô hình OSI được ký hiệu chung là gì?
+o	c. PDU
+15.	Đơn vị dữ liệu (PDU) tại tầng vận chuyển (Transport) là?
+o	d. Segment
+16.	Đơn vị dữ liệu (PDU) tại tầng mạng (Network) là?
+o	a. Packet
+17.	Khi một đơn vị dữ liệu di chuyển từ tầng cao đến tầng thấp hơn (quá trình đóng gói), các header sẽ được?
+o	a. Thêm vào
+18.	Quá trình mở gói dữ liệu (de-encapsulation) thì các header của các tầng sẽ được?
+o	d. Loại bỏ dần
+________________________________________
+III. Miền đụng độ (Collision) và Miền quảng bá (Broadcast)
+19.	Thiết bị Hub có bao nhiêu collision domain?
+o	a. 1
+20.	Thiết bị Switch có bao nhiêu collision domain?
+o	a. 1 collision/port
+21.	Thiết bị Switch có bao nhiêu Broadcast domain?
+o	b. 1
+22.	Muốn tăng số lượng collision domain trong một hệ thống mạng thì sử dụng thiết bị nào?
+o	d. Switch
+23.	Khi sử dụng thiết bị repeater trong hệ thống mạng thì?
+o	c. Mở rộng thêm collision domain
+24.	Việc nhiều các gói tin bị đụng độ trên mạng sẽ làm cho?
+o	d. Hiệu quả truyền thông của mạng giảm đi
+________________________________________
+IV. Địa chỉ IP và Subnetting
+25.	Địa chỉ IP version 4 có bao nhiêu octet?
+o	d. 4 octet
+26.	Lớp B là lớp có dãy địa chỉ từ?
+o	b. Từ 128.0.0.0 tới 191.255.255.255
+27.	Byte đầu tiên của một địa chỉ IP có dạng $11011011_2$. Vậy nó thuộc lớp nào?
+o	c. Lớp C
+28.	Địa chỉ IP 172.169.1.2/18 thuộc lớp nào?
+o	c. Lớp B
+29.	Subnet mask mặc định của lớp C là?
+o	d. 255.255.255.0
+30.	Một mạng con lớp C mượn 2 bit để chia Subnet thì Subnet mask mới là?
+o	a. 255.255.255.192
+31.	Một mạng con lớp C mượn 5 bit để chia Subnet thì Subnet mask mới là?
+o	d. 255.255.255.248
+32.	Một mạng con lớp A mượn 21 bit để chia Subnet thì Subnet mask mới là?
+o	d. 255.255.255.248
+33.	Cần chia mạng con Class B với mỗi Subnet có tối đa 500 host, dùng Subnet Mask nào?
+o	a. 11111111.11111111.11111110.00000000 (255.255.254.0)
+34.	Địa chỉ mạng là địa chỉ có?
+o	a. Tất cả các bit phần host = 0
+35.	Địa chỉ broadcast là địa chỉ có?
+o	b. Tất cả các bit phần host = 1
+36.	Cho IP 192.168.1.1 và Subnet Mask 255.255.255.224. Địa chỉ broadcast là?
+o	a. 192.168.1.31
+37.	Địa chỉ broadcast của mạng 192.168.25.128/28 là?
+o	c. 192.168.25.143
+38.	Số nhị phân 231 đổi sang thập phân là?
+o	b. 11100111
+39.	Số nhị phân nào có giá trị là 164?
+o	c. 10100100
+________________________________________
+V. Giao thức và Dịch vụ mạng
+40.	Giao thức IP hoạt động ở tầng nào?
+o	a. Network Layer (Trong mô hình TCP/IP là tầng Internet) 
+41.	Các giao thức nào nằm ở tầng Network?
+o	d. IP và ARP
+42.	Các giao thức nào nằm ở tầng Transport?
+o	a. TCP và UDP
+43.	UDP là giao thức?
+o	b. Là giao thức thuộc tầng Transport
+44.	Giao thức nào không đảm bảo dữ liệu gửi đi có tới máy nhận hoàn chỉnh hay không?
+o	c. UDP
+45.	Trong TCP, giao thức nào được dùng để điều khiển dòng (flow control)?
+o	c. Sliding Window Protocol
+46.	Dịch vụ mạng DNS dùng để?
+o	b. Phân giải tên thành địa chỉ IP và ngược lại
+47.	Dịch vụ mạng SMTP dùng để?
+o	d. Gửi thư điện tử
+48.	Dịch vụ nào cho phép đăng nhập và làm việc với hệ thống ở xa?
+o	b. Telnet (hoặc SSH tùy lựa chọn câu hỏi) 
+________________________________________
+VI. Đường truyền và Cáp mạng
+49.	Kỹ thuật truy cập đường truyền trong mạng Ethernet là?
+o	a. CSMA/CD
+50.	Đầu nối của loại cáp UTP là?
+o	c. RJ45
+51.	Cáp UTP có thể kết nối tối đa bao nhiêu mét?
+o	c. 100 mét
+52.	Cáp quang có thể kết nối tối đa bao nhiêu mét?
+o	a. 10.000 mét
+53.	Để kết nối hai HUB với nhau ta sử dụng kiểu bấm cáp?
+o	b. Cáp chéo
+54.	Để nối Router và máy tính ta sử dụng kiểu bấm cáp?
+o	d. Cáp chéo
+55.	Để kết nối trực tiếp hai máy tính với nhau ta dùng?
+o	a. Cross Cable (Cáp chéo)
+________________________________________
+VII. Địa chỉ MAC và Lệnh hệ thống
+56.	Địa chỉ MAC (Physical Address) có độ dài bao nhiêu bit?
+o	a. 48 bits
+57.	Địa chỉ MAC là?
+o	b. Địa chỉ lớp 2 được gắn cứng vào card mạng (NIC)
+58.	Trong Windows, muốn xem địa chỉ MAC ta dùng lệnh?
+o	b. getmac (hoặc ipconfig /all) 
+59.	Trong Windows, dùng lệnh gì để dò đường xác định lỗi khi không kết nối được?
+o	b. tracert
+________________________________________
+VIII. Các mô hình mạng
+60.	Trong mô hình mạng hình sao (Star), nếu hub/switch trung tâm hỏng thì?
+o	a. Mạng không thể hoạt động được
+61.	Trong mô hình mạng kiểu vòng (Ring), nếu một máy tính bị hư thì?
+o	b. Phát biểu trên là đúng (Các máy còn lại không truy cập được)
+62.	Mạng Internet là sự phát triển của?
+o	d. Hệ thống mạng WAN
+63.	Kỹ thuật kết nối máy tính trong phạm vi một văn phòng gọi là?
+o	b. LAN
+
