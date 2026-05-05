@@ -140,3 +140,83 @@ o	d. Hệ thống mạng WAN
 63.	Kỹ thuật kết nối máy tính trong phạm vi một văn phòng gọi là?
 o	b. LAN
 
+Quản trị mạng là gì?
+B. Quản lý, vận hành và bảo trì mạng máy tính
+Phương thức Polling trong quản trị mạng là gì?
+B. Thiết bị quản lý chủ động thăm dò thiết bị theo chu kỳ
+Hệ thống quản trị mạng (NMS) bao gồm gì?
+C. Cả phần mềm và phần cứng
+SNMP là viết tắt của gì?
+B. Simple Network Management Protocol
+Thành phần nào của SNMP thu thập thông tin từ thiết bị?
+A. Agent
+Thành phần nào của SNMP là phần mềm trung tâm giám sát?
+B. Manager
+Cơ sở dữ liệu quản lý đối tượng mạng gọi là gì?
+C. MIB
+Trap trong SNMP là gì?
+B. Thông báo tự động khi có sự kiện bất thường
+SNMP dùng để làm gì?
+B. Giám sát và quản lý các thiết bị mạng
+SNMP được định nghĩa trong đâu?
+C. RFC
+Thiết bị nào dùng để kết nối các mạng khác nhau?
+B. Router
+Switch có chức năng gì?
+B. Chuyển tiếp dữ liệu giữa các thiết bị trong cùng mạng nội bộ
+Hub khác Switch ở điểm nào?
+B. Hub truyền dữ liệu tới tất cả các cổng
+Địa chỉ IP dùng để làm gì?
+A. Phân biệt các thiết bị trong mạng
+Định tuyến tĩnh là gì?
+B. Quản trị viên thiết lập thủ công đường đi dữ liệu
+Ưu điểm của định tuyến tĩnh là gì?
+B. Tiết kiệm băng thông, kiểm soát rõ đường đi
+CLI dùng để làm gì?
+A. Cấu hình thiết bị mạng qua dòng lệnh
+VLAN có tác dụng gì?
+B. Chia mạng nội bộ thành các vùng logic
+Access Point là gì?
+B. Phát sóng WiFi, kết nối mạng không dây với mạng có dây
+Trong định tuyến tĩnh, thông tin cấu hình được thiết lập như thế nào?
+A. Thiết lập thủ công bởi quản trị viên
+Windows Server là gì?
+B. Hệ điều hành máy chủ của Microsoft
+Active Directory có chức năng gì?
+A. Quản lý tập trung người dùng và thiết bị
+Domain trong Active Directory là gì?
+B. Miền quản lý tập trung các tài khoản và thiết bị
+OU dùng để làm gì?
+A. Phân nhóm đối tượng trong AD
+Group Policy cho phép gì?
+B. Cấu hình, kiểm soát hệ thống tập trung
+File Server là gì?
+A. Máy chủ lưu trữ và chia sẻ dữ liệu
+Disk Management dùng để làm gì?
+B. Quản lý ổ đĩa, phân vùng
+Dịch vụ nào không thuộc Windows Server?
+D. Android OS
+Sao lưu dữ liệu là gì?
+B. Lưu bản sao dữ liệu phòng sự cố
+Phục hồi dữ liệu gọi là gì?
+C. Restore
+Bảo mật mạng nhằm mục tiêu gì?
+B. Ngăn chặn truy cập trái phép và bảo vệ dữ liệu
+Tính bí mật của dữ liệu là gì?
+C. Chỉ người có quyền mới được truy cập
+Tấn công DoS có tác dụng gì?
+B. Làm hệ thống ngừng hoạt động
+Lừa đảo email giả mạo gọi là gì?
+B. Phishing
+Firewall dùng để làm gì?
+B. Kiểm soát lưu lượng, ngăn truy cập trái phép
+IDS/IPS có tác dụng gì?
+A. Phát hiện và ngăn chặn tấn công mạng
+VPN dùng để làm gì?
+B. Tạo kết nối an toàn qua mạng công cộng
+Antivirus dùng để làm gì?
+B. Phát hiện và tiêu diệt phần mềm độc hại
+Mã hóa dữ liệu giúp gì?
+B. Bảo vệ dữ liệu khỏi truy cập trái phép
+Xác thực người dùng là gì?
+B. Kiểm tra danh tính khi truy cập hệ thống
