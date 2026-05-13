@@ -18,3 +18,476 @@
 18.  Không nên dùng điểm giữa kỳ nếu mục tiêu là cảnh báo sớm ngay từ tuần thứ 2, vì biến này chỉ xuất hiện sau nửa học kỳ. Đây là sai lệch về thời điểm dữ liệu: mô hình có thể rất chính xác nhưng lại không dùng được trong thực tế lúc cần dự đoán sớm. Nên xây dựng mô hình chỉ với dữ liệu sẵn có ở tuần thứ 2, rồi có thể làm thêm mô hình giai đoạn sau để cập nhật dần mức rủi ro. 
 19.  Khi dữ liệu từ các khoa có chất lượng khác nhau, mô hình dễ bị thiên lệch về khoa nhập dữ liệu đầy đủ và giảm độ tin cậy ở khoa nhập thiếu. Ngoài ra còn có nguy cơ sai lệch nhãn, mã hóa không thống nhất và missingness không ngẫu nhiên. Cần kiểm tra chất lượng theo từng nguồn: mức đầy đủ, tính nhất quán, tỷ lệ thiếu, phân phối biến, và độ chính xác của nhãn trước khi gộp dữ liệu huấn luyện. 
 20.  Đây là vấn đề khác biệt phân phối dữ liệu: mô hình học từ khu vực nội thành nên đặc trưng ở nông thôn không còn phù hợp. Nếu đem áp dụng trực tiếp, sai số sẽ tăng vì giao thông, mật độ dân cư, hạ tầng và quãng đường khác hẳn. Trước khi triển khai, cần kiểm tra lại phân phối dữ liệu ở khu vực mới, thu thập mẫu thực tế, hiệu chỉnh hoặc huấn luyện lại mô hình, rồi giám sát liên tục sau khi chạy thử.
+
+Câu 1 - Câu 5: Mục tiêu kinh doanh, Đánh đổi và Giải thích mô hình
+•	Câu 1 (Xét duyệt khoản vay): * Phân tích mâu thuẫn: Đây là bài toán đánh đổi giữa Precision (Độ chính xác) và Recall (Độ phủ) trong Ma trận nhầm lẫn (Confusion Matrix). Bộ phận kinh doanh quan tâm đến lỗi False Negative (từ chối khách tốt), trong khi Quản trị rủi ro lo ngại False Positive (duyệt khách xấu). 
+o	Hướng điều chỉnh: Cần xem xét lại hàm chi phí (Cost Matrix) của ngân hàng để tìm ra ngưỡng xác suất (Threshold) tối ưu, cân bằng giữa lợi nhuận từ khách hàng vay và rủi ro nợ xấu. 
+•	Câu 2 (Dự đoán nhu cầu hàng hóa):
+o	Nguyên nhân sai lệch: Mô hình có thể bị Overfitting với dữ liệu quá khứ, hoặc không nắm bắt được các yếu tố ngoại cảnh đột ngột biến động (thay đổi theo mùa, trend kết thúc). 
+o	Đề xuất: Bổ sung các tính năng ngoại sinh (external features) như sự kiện, xu hướng mạng xã hội. Áp dụng cơ chế "Human-in-the-loop" để con người duyệt lại khi hệ thống đề xuất nhập số lượng lớn bất thường. 
+•	Câu 3 (Hệ thống gợi ý sản phẩm):
+o	Phân tích vấn đề: Lỗi lớn nhất nằm ở cách xác định mục tiêu kinh doanh (Business Objective). Thuật toán đang tối ưu hóa tỷ lệ chuyển đổi (Conversion Rate) thay vì giá trị vòng đời khách hàng (CLV) hoặc doanh thu. 
+o	Đề xuất: Thay đổi hàm mục tiêu của hệ thống gợi ý để tối ưu hóa Giỏ hàng (Basket Value) hoặc Lợi nhuận gộp, thay vì chỉ tập trung vào việc "khách hàng có mua hay không". 
+•	Câu 4 (Dự đoán nhân viên nghỉ việc - Churn Prediction):
+o	Phân tích: Khi xây dựng các mô hình Churn Prediction, sự bất đồng giữa thuật toán và quản lý thường xuyên xảy ra. Mô hình có thể tìm ra các mẫu ẩn (lương, tăng ca) mà quản lý không thấy, hoặc mô hình đang bị nhiễu. 
+o	Kiểm tra và giải thích: Sử dụng các kỹ thuật Explainable AI (như SHAP, LIME) để bóc tách xem Feature nào ảnh hưởng lớn nhất đến quyết định của mô hình. Không nên công bố kết quả dự đoán thô ngay cho quản lý để tránh hiệu ứng tâm lý tiêu cực lên nhân viên đó. 
+•	Câu 5 (Chiến dịch quảng cáo AI):
+o	Phân tích CTR tăng nhưng Sales không tăng: AI đã tìm đúng tệp khách hàng "thích click" (hiếu kỳ) nhưng không có "ý định mua hàng" (Intent to Buy). 
+o	Hướng đánh giá lại: Cần thay đổi Metric đánh giá từ Click-through Rate (CTR) sang Return on Ad Spend (ROAS) hoặc tỷ lệ chuyển đổi mua hàng thực tế (Conversion Rate). 
+
+Câu 6 - Câu 10: Trải nghiệm người dùng và Độ bao phủ dữ liệu
+•	Câu 6 (Phát hiện gian lận bảo hiểm):
+o	Sự đánh đổi: Hệ thống đang ưu tiên Recall cao (bắt nhầm hơn bỏ sót) dẫn đến tỷ lệ False Positive cao, làm hỏng trải nghiệm người dùng hợp lệ. 
+o	Điều chỉnh: Phân luồng hồ sơ (Triage). Các hồ sơ có rủi ro thấp sẽ được duyệt tự động (Auto-approve), hệ thống chỉ đẩy các hồ sơ có điểm rủi ro rất cao cho nhân viên điều tra thủ công. 
+•	Câu 7 (Dự đoán giá nhà):
+o	Nguyên nhân: Dữ liệu huấn luyện có thể bị mất cân bằng (chủ yếu thu thập ở trung tâm) hoặc phân phối đặc trưng thay đổi (ví dụ: ở ngoại thành diện tích quan trọng hơn vị trí so với trung tâm). 
+o	Cách kiểm tra: Phân tích độ lỗi của mô hình theo từng khu vực địa lý. Cân nhắc huấn luyện hai mô hình riêng biệt (một cho trung tâm, một cho ngoại thành). 
+•	Câu 8 (Dự đoán sinh viên học kém):
+o	Hạn chế của dữ liệu: Lấy "số lần đăng nhập" làm thước đo duy nhất cho "sự nỗ lực" là một sai lầm về Data Proxy. 
+o	Tránh kết luận sai: Cần tích hợp thêm dữ liệu từ điểm bài tập, điểm danh offline hoặc tương tác trên lớp để có cái nhìn toàn diện hơn. 
+•	Câu 9 (Phân loại bệnh nhân):
+o	Vấn đề: Hệ thống đang bị "Alarm fatigue" do đặt ngưỡng rủi ro quá thấp (mục tiêu phòng thủ). 
+o	Điều chỉnh: Thay vì cảnh báo nhị phân (Nguy cơ / Không nguy cơ), hãy để AI trả về Xác suất (Probability Score) và sắp xếp bệnh nhân theo thứ tự ưu tiên khám. 
+•	Câu 10 (Dự đoán thời gian giao hàng):
+o	Nguyên nhân: Mô hình đang bị thiếu (Underfitting) các đặc trưng quan trọng về ngoại cảnh. 
+o	Bổ sung: Cần tích hợp trực tiếp API Thời tiết và Dữ liệu giao thông theo thời gian thực làm đầu vào (Input features) cho mô hình để xử lý các tình huống bất thường. 
+
+
+Câu 11 - Câu 15: Rò rỉ dữ liệu, Biến gây nhiễu và Imbalanced Data
+•	Câu 11 (Mô hình dự đoán vỡ nợ):
+o	Vấn đề: Tập dữ liệu vỡ nợ luôn có độ lệch cực lớn (Imbalanced Data), nếu dùng Accuracy để đo lường thì mô hình dự đoán tất cả "không vỡ nợ" vẫn đúng đến 99%. 
+o	Hướng xử lý: Dùng kỹ thuật SMOTE để tạo thêm dữ liệu nhóm thiểu số, sử dụng Class Weights, và đánh giá mô hình bằng F1-Score hoặc ROC-AUC. 
+•	Câu 12 (Đánh giá hiệu quả chiến dịch):
+o	Kết luận chưa chắc đúng vì: Quản lý đang nhầm lẫn giữa Tương quan (Correlation) và Nhân quả (Causation). Các yếu tố ngoại lai (ngày lễ, thời tiết) đóng vai trò là biến gây nhiễu (Confounding variables). 
+o	Cần kiểm tra: Phải có nhóm đối chứng (Control Group) không nhận khuyến mãi trong cùng thời điểm đó để so sánh chéo. 
+•	Câu 13 (Dự đoán khách hàng mua hàng):
+o	Rò rỉ dữ liệu (Data Leakage): Việc "thêm vào giỏ hàng" xảy ra ngay sát lúc thanh toán, mang thông tin về nhãn (label) rò rỉ vào quá trình đào tạo mô hình. 
+o	Cách xử lý: Phải loại bỏ biến này nếu muốn dự đoán hành vi từ sớm, hoặc quy định rõ thời gian trễ (ví dụ: chỉ lấy số lần thêm vào giỏ hàng của ngày hôm trước). 
+•	Câu 14 (Dự đoán nghỉ việc theo phòng ban):
+o	Phân tích Confounding Factors: Không nên kết luận trực tiếp. Phòng ban chỉ là bề nổi; yếu tố gây nhiễu thực sự có thể là do người quản lý trực tiếp của phòng đó, mức lương thấp hơn mặt bằng, hoặc khối lượng công việc quá tải. 
+•	Câu 15 (Dùng dữ liệu cũ dự đoán chiến dịch mới):
+o	Rủi ro: Mô hình bị Concept Drift do thông điệp và kênh truyền thông đã thay đổi hoàn toàn. 
+o	Cách chuẩn bị: Nên chạy một đợt thử nghiệm A/B diện rộng với ngân sách nhỏ để thu thập dữ liệu nhãn mới trước khi huấn luyện mô hình dự đoán. 
+
+Câu 16 - Câu 20: Ngoại lai, Điền khuyết và Data Shift
+•	Câu 16 (Dữ liệu ngoại lai bồi thường bảo hiểm):
+o	Phân tích: Không đồng ý với việc xóa. Trong bảo hiểm và tài chính, các giá trị siêu lớn chính là "Tail Risk" (Rủi ro đuôi) cốt lõi cần phải mô hình hóa. Chỉ xóa Outlier khi xác định chắc chắn đó là lỗi đánh máy/nhập liệu. 
+•	Câu 17 (Xử lý Missing Data 40%):
+o	So sánh giải pháp: Mức 40% là rất lớn. Xóa cột sẽ làm mất thông tin quan trọng. Điền giá trị bằng Trung bình/Trung vị sẽ làm biến dạng phân phối. 
+o	Lựa chọn tốt nhất: Bổ sung dữ liệu từ nguồn khác (dùng vĩ độ/kinh độ gọi API bản đồ để tính lại khoảng cách). Nếu không, dùng một thuật toán học máy khác (ví dụ: KNN Imputer) để dự đoán phần khuyết. 
+•	Câu 18 (Cảnh báo sinh viên trượt từ tuần 2):
+o	Target Leakage: Tuyệt đối không được dùng điểm giữa kỳ vì tại thời điểm tuần thứ 2, dữ liệu này chưa tồn tại. 
+o	Sự phù hợp: Chỉ được phép sử dụng các đặc trưng thu thập được tính đến đúng thời điểm muốn suy diễn (từ tuần 1 đến tuần 2). 
+•	Câu 19 (Dữ liệu bệnh viện phân tán):
+o	Vấn đề dự đoán: Khi phân phối missing data không đồng đều giữa các khoa (Missing Not At Random), AI sẽ bị Bias (thiên vị), hoạt động tốt ở khoa nhập liệu đầy đủ và dự đoán sai lệch ở khoa thiếu dữ liệu. 
+o	Cách kiểm tra: Thực hiện Data Profiling để đo tỷ lệ Missing Values theo từng khoa, chuẩn hóa lại quy trình thu thập đầu vào. 
+•	Câu 20 (Dự đoán giao hàng từ nội thành sang nông thôn):
+o	Data Distribution Shift: Đặc biệt trong các tập dữ liệu lưu lượng lớn về giao thông, việc thay đổi không gian dẫn đến các biến số (mật độ xe, vận tốc trung bình, loại đường) thay đổi hoàn toàn phân phối. 
+o	Các bước cần làm: Cần đo lường mức độ Shift, sau đó thu thập thêm tập dữ liệu đại diện ở khu vực nông thôn và dùng kỹ thuật Transfer Learning hoặc Fine-tuning để cập nhật mô hình. 
+
+1. Giải quyết bài toán bằng Tìm kiếm (Search)
+Tìm kiếm là nền tảng của trí tuệ hệ thống, cho phép AI thử các khả năng một cách có tổ chức thay vì đoán mò.
+•	Các thành phần của một bài toán tìm kiếm: Để máy tính giải quyết được vấn đề, ta phải biểu diễn nó qua 7 yếu tố: State (Trạng thái hiện tại), Initial State (Điểm bắt đầu), Goal State (Mục tiêu), Action (Các hành động hợp lệ), Transition Model (Quy tắc chuyển trạng thái), Path Cost (Chi phí đường đi) và Solution (Chuỗi hành động dẫn đến đích).
+•	Phân tích các chiến lược tìm kiếm không có thông tin (Uninformed Search):
+o	BFS (Breadth-First Search): Sử dụng hàng đợi (Queue - FIFO). Ưu điểm là đảm bảo tìm ra lời giải tối ưu về số bước đi, nhưng nhược điểm là tốn nhiều bộ nhớ vì phải lưu toàn bộ danh sách các nút chờ xét (Frontier).
+o	UCS (Uniform-Cost Search): Sử dụng hàng đợi ưu tiên (Priority Queue). Thuật toán này luôn mở rộng nút có tổng chi phí thấp nhất, phù hợp cho các bài toán có trọng số khác nhau trên mỗi cạnh (như Google Maps chọn đường ít kẹt xe nhất).
+o	DFS (Depth-First Search): Sử dụng ngăn xếp (Stack - LIFO). Nó đi sâu hết mức một nhánh rồi mới quay lui. DFS tiết kiệm bộ nhớ hơn BFS nhưng có rủi ro lạc vào nhánh vô hạn và không đảm bảo tìm thấy lời giải tốt nhất.
+o	IDS (Iterative Deepening Search): Kết hợp ưu điểm của cả BFS (đầy đủ, tối ưu số bước) và DFS (ít tốn bộ nhớ) bằng cách lặp lại việc tìm kiếm với giới hạn độ sâu tăng dần.
+•	Tiêu chí đánh giá: Một thuật toán được đánh giá dựa trên: Tính đầy đủ (Completeness), Tính tối ưu (Optimality), Độ phức tạp thời gian và Độ phức tạp không gian.
+2. Phương pháp Học máy (Machine Learning)
+Học máy là quá trình hệ thống tự học từ dữ liệu mà không cần lập trình từng quy tắc chi tiết.
+•	Quy trình một dự án ML: Gồm 5 bước: Xác định bài toán → Thu thập dữ liệu → Tiền xử lý → Chia dữ liệu (Train/Validation/Test) → Chọn và huấn luyện thuật toán. Trong đó, Dữ liệu Test là "thước đo vàng" chỉ được dùng một lần duy nhất để đánh giá khả năng tổng quát hóa của mô hình.
+•	Học có giám sát (Supervised Learning): Học từ dữ liệu đã có nhãn (Label).
+o	Hồi quy (Regression): Dự đoán giá trị số liên tục (như giá nhà, doanh thu). Các thuật toán phổ biến gồm Linear Regression (hàm ), Decision Tree Regression và Random Forest. Chỉ số đánh giá thường dùng là MAE, MSE và RMSE.
+o	Phân loại (Classification): Dự đoán nhãn danh mục (như Spam/Không Spam). Gồm phân loại nhị phân (2 lớp) và phân loại đa lớp. Các chỉ số đánh giá quan trọng là Accuracy, Precision, Recall và F1-Score.
+•	Học không giám sát (Unsupervised Learning): Tìm cấu trúc ẩn trong dữ liệu không nhãn.
+o	Phân cụm (Clustering): Thuật toán K-means chia dữ liệu thành K nhóm dựa trên sự tương đồng. DBSCAN lại nhóm dữ liệu theo mật độ, có khả năng phát hiện điểm nhiễu (outlier).
+o	Giảm chiều dữ liệu (Dimensionality Reduction): Như thuật toán PCA, giúp nén dữ liệu từ hàng ngàn thuộc tính xuống còn 2-3 chiều để dễ trực quan hóa mà vẫn giữ được thông tin quan trọng.
+•	Học sâu (Deep Learning): Sử dụng các mạng nơ-ron nhân tạo (ANN) với cấu trúc nhiều lớp ẩn (Hidden Layers). Quá trình học diễn ra thông qua Lan truyền xuôi (Forward Propagation) để dự đoán và Lan truyền ngược (Backpropagation) kết hợp với Gradient Descent để điều chỉnh trọng số nhằm giảm thiểu sai số.
+3. Ứng dụng thực tế và Những thách thức tương lai
+AI không còn là lý thuyết mà đã trở thành công cụ thực dụng trong nhiều ngành.
+•	Các lĩnh vực tiên phong:
+o	Y tế: AI không chỉ chẩn đoán hình ảnh (X-quang, MRI) chính xác hơn bác sĩ mà còn giúp rút ngắn thời gian phát triển thuốc mới từ 10-15 năm xuống còn 3-5 năm.
+o	Sản xuất (Công nghiệp 4.0): Sử dụng Robot cộng tác (Cobots) và hệ thống bảo trì dự báo (Predictive Maintenance) để ngăn ngừa hỏng hóc máy móc trước khi nó xảy ra.
+o	Tài chính: Chấm điểm tín dụng cá nhân hóa và giao dịch thuật toán tốc độ cao.
+•	Rào cản và Thách thức:
+o	Vấn đề "Hộp đen" (Black Box): Các mô hình Deep Learning quá phức tạp khiến con người khó giải thích lý do đằng sau một quyết định, điều này gây rủi ro lớn trong y tế và tư pháp.
+o	Thiên lệch dữ liệu (Bias): AI có thể học và khuếch đại các định kiến xã hội nết dữ liệu huấn luyện không cân bằng.
+o	Tác động xã hội: Tự động hóa có thể thay thế các công việc lặp đi lặp lại nhưng đồng thời tạo ra nhu cầu về những kỹ năng mới và các vai trò sáng tạo hơn.
+•	Tầm nhìn: Mục tiêu cuối cùng là hướng tới Trí tuệ nhân tạo tổng quát (AGI) có năng lực tư duy như con người. Tuy nhiên, định hướng quan trọng hơn là phát triển AI có trách nhiệm, minh bạch và đóng vai trò hỗ trợ, giúp con người thông minh và mạnh mẽ hơn thay vì thay thế hoàn toàn
+
+Câu 1 — AI xét duyệt khoản vay
+Một ngân hàng triển khai hệ thống AI để hỗ trợ xét duyệt khoản vay. Sau 3 tháng, bộ phận kinh doanh phản ánh rằng mô hình từ chối quá nhiều khách hàng tiềm năng, trong khi bộ phận quản trị rủi ro lại cho rằng mô hình vẫn chưa đủ thận trọng. Nếu là người phụ trách dự án, anh/chị sẽ phân tích mâu thuẫn này như thế nào và cần xem xét những yếu tố nào trước khi điều chỉnh hệ thống?
+Mâu thuẫn xảy ra vì:
+•	bộ phận kinh doanh muốn tăng số khách được duyệt 
+•	bộ phận rủi ro muốn giảm nợ xấu 
+AI luôn tồn tại đánh đổi:
+•	duyệt nhiều → tăng doanh thu nhưng tăng rủi ro 
+•	siết chặt → an toàn hơn nhưng mất khách tốt 
+Cần kiểm tra:
+•	false positive: khách tốt bị từ chối 
+•	false negative: khách xấu được duyệt 
+•	dữ liệu có bias không 
+•	threshold đang đặt hợp lý chưa 
+•	dữ liệu có bị drift theo thời gian không 
+Hướng xử lý:
+•	điều chỉnh threshold 
+•	chia nhiều mức rủi ro 
+•	kết hợp AI + nhân viên tín dụng 
+•	theo dõi hiệu quả mô hình liên tục 
+
+Câu 2 — AI dự đoán nhu cầu sai
+Một chuỗi siêu thị dùng AI để dự đoán nhu cầu hàng hóa. Mô hình dự đoán một mặt hàng sẽ bán rất chạy nên hệ thống đề xuất nhập số lượng lớn. Tuy nhiên, mặt hàng đó sau đó bán chậm, gây tồn kho cao. Anh/chị hãy phân tích các nguyên nhân có thể dẫn đến sai lệch này và đề xuất cách cải thiện quy trình ra quyết định.
+Nguyên nhân:
+•	dữ liệu cũ không còn phù hợp 
+•	thiếu biến như thời tiết, trend, đối thủ 
+•	overfitting 
+•	dữ liệu bất thường làm lệch mô hình 
+•	phụ thuộc AI quá mức 
+Ví dụ:
+sản phẩm từng hot do TikTok nhưng hiện tại hết trend.
+Hướng xử lý:
+•	bổ sung dữ liệu ngoài 
+•	cập nhật mô hình thường xuyên 
+•	dự báo theo nhiều kịch bản 
+•	có người kiểm tra quyết định nhập hàng lớn 
+
+Câu 3 — Recommendation System chỉ gợi ý đồ rẻ
+Một sàn thương mại điện tử phát hiện hệ thống gợi ý sản phẩm (Recommen dation System) thường xuyên gợi ý các sản phẩm giá rẻ cho một nhóm khách hàng, dù họ có khả năng chi trả cao hơn. Theo anh/chị, vấn đề này có thể xuất phát từ dữ liệu, thuật toán, hay cách xác định mục tiêu kinh doanh? Hãy phân tích và đề xuất hướng xử lý.
+Nguyên nhân:
+•	AI học từ click/view nên ưu tiên đồ rẻ 
+•	thuật toán tối ưu CTR thay vì doanh thu 
+•	mục tiêu kinh doanh xác định sai 
+Hậu quả:
+•	giảm trải nghiệm khách VIP 
+•	mất cơ hội upsell 
+•	giảm doanh thu 
+Giải pháp:
+•	tối ưu conversion hoặc revenue 
+•	phân nhóm khách hàng 
+•	thêm dữ liệu thu nhập/hành vi mua 
+•	đa dạng recommendation 
+
+Câu 4 — AI dự đoán nhân viên nghỉ việc
+Một công ty sử dụng AI để dự đoán nhân viên có nguy cơ nghỉ việc. Mô hình đánh dấu một số nhân viên là “nguy cơ cao”, nhưng quản lý trực tiếp cho rằng họ vẫn đang làm việc tốt. Nếu anh/chị là chuyên viên phân tích dữ liệu, anh/chị sẽ kiểm tra và giải thích kết quả này như thế nào để tránh gây hiểu nhầm hoặc ảnh hưởng tiêu cực đến nhân viên?
+Vấn đề:
+mô hình dự đoán “rủi ro nghỉ việc” chứ không đánh giá năng lực.
+Có thể:
+•	nhân viên vẫn làm tốt 
+•	nhưng thuộc nhóm thường nghỉ việc theo lịch sử 
+Cần kiểm tra:
+•	nhãn dữ liệu 
+•	feature quan trọng 
+•	có data leakage không 
+•	kết quả có bias không 
+Giải thích:
+•	đây chỉ là xác suất rủi ro 
+•	không phải kết luận chắc chắn 
+Giải pháp:
+•	dùng SHAP/explainability 
+•	kết hợp đánh giá quản lý trực tiếp 
+•	không dùng AI để kết luận tự động 
+
+
+
+
+Câu 5 — CTR tăng nhưng doanh số không tăng
+Một chiến dịch quảng cáo dùng AI để chọn nhóm khách hàng mục tiêu. Sau chiến dịch, tỷ lệ nhấp chuột (Click-through Rate- CTR) tăng nhưng doanh số không tăng. Anh/chị hãy phân tích vì sao một chỉ số có vẻ tốt lại không dẫn đến kết quả kinh doanh tốt. Nên đánh giá lại bài toán AI này theo hướng nào?
+CTR chỉ phản ánh:
+•	nhiều người click 
+Không có nghĩa:
+•	nhiều người mua 
+Nguyên nhân:
+•	quảng cáo gây tò mò nhưng không đúng nhu cầu 
+•	landing page kém 
+•	giá cao 
+•	checkout phức tạp 
+Sai lầm:
+đánh giá AI bằng metric chưa đúng business goal.
+Nên đánh giá bằng:
+•	conversion rate 
+•	revenue 
+•	ROAS 
+•	lợi nhuận thực tế 
+
+Câu 6 — AI phát hiện gian lận bảo hiểm
+Một công ty bảo hiểm dùng AI để phát hiện gian lận. Mô hình phát hiện được nhiều hồ sơ nghi ngờ hơn trước, nhưng khách hàng phàn nàn vì nhiều hồ sơ hợp lệ bị kiểm tra quá lâu. Anh/chị hãy phân tích sự đánh đổi giữa phát hiện gian lận và trải nghiệm khách hàng. Doanh nghiệp nên điều chỉnh quy trình sử dụng AI như thế nào?
+Vấn đề:
+•	tăng khả năng phát hiện gian lận 
+•	nhưng tăng false positive 
+Hậu quả:
+•	khách hợp lệ bị giữ hồ sơ lâu 
+•	trải nghiệm xấu 
+•	mất niềm tin 
+Đây là trade-off:
+•	precision 
+•	recall 
+Giải pháp:
+•	chia nhiều mức rủi ro 
+•	hồ sơ nguy cơ trung bình → nhân viên kiểm tra 
+•	tối ưu threshold 
+•	ưu tiên trải nghiệm khách hàng hợp lệ 
+
+Câu 7 — AI dự đoán giá nhà lệch ở ngoại thành
+Một mô hình AI dự đoán giá nhà hoạt động tốt ở các quận trung tâm nhưng sai lệch lớn ở khu vực ngoại thành. Anh/chị hãy suy luận những nguyên nhân có thể khiến mô hình hoạt động không đồng đều giữa các khu vực và đề xuất cách kiểm tra vấn đề này.
+Nguyên nhân:
+•	dữ liệu train chủ yếu ở trung tâm 
+•	thiếu dữ liệu ngoại thành 
+•	đặc trưng hai khu vực khác nhau 
+Ví dụ:
+ngoại thành phụ thuộc:
+•	đất 
+•	hạ tầng 
+•	khoảng cách 
+•	quy hoạch 
+Cần kiểm tra:
+•	error theo từng khu vực 
+•	phân phối dữ liệu 
+•	feature importance theo vùng 
+Giải pháp:
+•	thu thập thêm dữ liệu ngoại thành 
+•	train riêng theo khu vực 
+•	đánh giá model theo từng segment 
+
+
+
+Câu 8 — AI đánh giá sinh viên học kém
+Một trường đại học dùng AI để phát hiện sinh viên có nguy cơ học tập kém. Mô hình thường đánh dấu các sinh viên ít đăng nhập hệ thống học trực tuyến là nguy cơ cao. Tuy nhiên, một số sinh viên học tốt lại ít đăng nhập vì họ học bằng tài liệu offline. Anh/chị hãy phân tích hạn chế của dữ liệu trong tình huống này và đề xuất cách tránh kết luận sai.
+Sai lầm:
+AI xem “ít đăng nhập” = “học kém”.
+Trong khi:
+•	nhiều sinh viên học offline 
+•	dùng tài liệu riêng 
+Vấn đề:
+feature không phản ánh đầy đủ thực tế.
+Giải pháp:
+•	thêm điểm bài tập 
+•	điểm quiz 
+•	chuyên cần 
+•	hoạt động lớp học 
+•	dùng nhiều feature thay vì 1 tín hiệu 
+
+Câu 9 — AI hỗ trợ phân loại bệnh nhân
+Một phòng khám sử dụng AI để hỗ trợ phân loại bệnh nhân. Mô hình đưa ra cảnh báo nguy cơ cao cho nhiều bệnh nhân, khiến bác sĩ phải kiểm tra lại quá nhiều trường hợp. Theo anh/chị, hệ thống này đang gặp vấn đề gì về mục tiêu, dữ liệu hoặc cách sử dụng kết quả? Cần điều chỉnh như thế nào để AI hỗ trợ bác sĩ hiệu quả hơn?
+Vấn đề:
+AI cảnh báo quá nhiều ca nguy hiểm.
+Hậu quả:
+•	bác sĩ bị overload 
+•	mất thời gian kiểm tra 
+•	giảm hiệu quả hệ thống 
+Nguyên nhân:
+•	threshold quá thấp 
+•	mô hình quá nhạy 
+•	objective chưa đúng 
+Giải pháp:
+•	chia mức độ rủi ro 
+•	tối ưu precision 
+•	AI chỉ hỗ trợ ưu tiên ca bệnh 
+•	không thay thế bác sĩ 
+
+Câu 10 — AI dự đoán giao hàng sai khi mưa lớn
+Một công ty giao hàng dùng AI để dự đoán thời gian giao hàng. Vào những ngày mưa lớn, mô hình thường dự đoán quá lạc quan, khiến khách hàng nhận thông báo thời gian giao hàng không chính xác. Anh/chị hãy phân tích nguyên nhân và đề xuất cách bổ sung dữ liệu hoặc thay đổi quy trình để mô hình phản ánh tốt hơn các tình huống bất thường.
+Nguyên nhân:
+•	dữ liệu mưa lớn ít 
+•	thiếu feature thời tiết 
+•	không học được tình huống bất thường 
+Hậu quả:
+•	ETA quá lạc quan 
+•	khách khó chịu 
+Giải pháp:
+•	thêm dữ liệu: 
+o	thời tiết 
+o	tắc đường 
+o	tai nạn 
+•	retrain theo mùa 
+•	dùng real-time traffic 
+•	tạo khoảng thời gian dự đoán thay vì 1 con số cố định 
+
+Câu 11 — Imbalanced Data trong dự đoán vỡ nợ
+Trong bài toán dự đoán khách hàng có khả năng vỡ nợ, dữ liệu lịch sử cho thấy phần lớn khách hàng trong tập dữ liệu đều trả nợ đúng hạn. Nếu dùng dữ liệu này để huấn luyện mô hình, anh/chị dự đoán mô hình có thể gặp vấn đề gì? Hãy phân tích ảnh hưởng của mất cân bằng dữ liệu (Imbalanced Data) và đề xuất hướng xử lý.
+Dữ liệu:
+•	đa số trả nợ đúng hạn 
+•	ít khách vỡ nợ 
+Mô hình dễ:
+•	đoán tất cả “không vỡ nợ” 
+•	accuracy cao giả tạo 
+Hậu quả:
+•	bỏ sót khách nguy hiểm 
+Giải pháp:
+•	oversampling 
+•	undersampling 
+•	class weight 
+•	SMOTE 
+•	dùng: 
+o	precision 
+o	recall 
+o	F1 
+o	PR-AUC 
+
+Câu 12 — Doanh số tăng chưa chắc do khuyến mãi
+Một cửa hàng phân tích dữ liệu bán hàng và nhận thấy doanh số tăng mạnh trong một tháng. Quản lý kết luận rằng chiến dịch khuyến mãi rất hiệu quả. Tuy nhiên, cùng thời điểm đó có một dịp lễ lớn và thời tiết thuận lợi. Anh/chị hãy phân tích vì sao kết luận của quản lý có thể chưa chắc đúng và cần kiểm tra thêm những dữ liệu nào.
+Sai lầm:
+confuse correlation và causation.
+Doanh số tăng có thể do:
+•	lễ lớn 
+•	thời tiết đẹp 
+•	xu hướng thị trường 
+Không chắc:
+do khuyến mãi.
+Cần kiểm tra:
+•	nhóm đối chứng 
+•	doanh số cùng kỳ 
+•	dữ liệu trước/sau chiến dịch 
+•	A/B testing 
+Câu 13 — Data Leakage trong dự đoán mua hàng
+Một sàn thương mại điện tử muốn dự đoán khả năng khách hàng mua hàng. Trong dữ liệu, biến “số lần thêm vào giỏ hàng” có vẻ liên quan rất mạnh đến việc mua hàng. Tuy nhiên, nhóm kỹ thuật phát hiện biến này được ghi nhận sau khi khách hàng đã gần hoàn tất mua hàng. Anh/chị hãy phân tích vấn đề rò rỉ dữ liệu (Data Leakage) trong tình huống này và cách xử lý.
+Biến:
+“thêm vào giỏ hàng”
+được ghi nhận sau khi khách gần mua xong.
+=> AI vô tình nhìn thấy “tương lai”.
+Hậu quả:
+•	train accuracy rất cao 
+•	deploy thực tế thất bại 
+Giải pháp:
+•	chỉ dùng dữ liệu có trước thời điểm dự đoán 
+•	validate theo timeline 
+•	kiểm tra feature leakage 
+
+Câu 14 — Phòng ban ảnh hưởng mạnh đến nghỉ việc
+Một mô hình dự đoán nghỉ việc sử dụng dữ liệu về lương, số ngày nghỉ, số năm làm việc, phòng ban và điểm đánh giá hiệu suất. Kết quả cho thấy “phòng ban” là yếu tố ảnh hưởng rất mạnh. Anh/chị có nên kết luận rằng nhân viên thuộc phòng ban đó có nguy cơ nghỉ việc cao hơn không? Hãy phân tích các yếu tố gây nhiễu (Confounding Factors) có thể tồn tại.
+Không nên kết luận:
+“phòng ban đó khiến nhân viên nghỉ”.
+Có thể tồn tại confounding factors:
+•	lương thấp hơn 
+•	quản lý kém 
+•	áp lực cao 
+•	OT nhiều 
+•	nhân viên trẻ hơn 
+Giải pháp:
+•	phân tích đa biến 
+•	kiểm soát biến gây nhiễu 
+•	dùng causal analysis nếu cần 
+Câu 15 — Dùng dữ liệu cũ cho chiến dịch mới
+Một công ty muốn dùng dữ liệu cũ để dự đoán khách hàng nào sẽ phản hồi với chiến dịch quảng cáo mới. Tuy nhiên, chiến dịch mới có thông điệp, kênh truyền thông và nhóm sản phẩm khác hoàn toàn chiến dịch cũ. Anh/chị hãy phân tích rủi ro khi dùng dữ liệu lịch sử trong tình huống này và đề xuất cách chuẩn bị dữ liệu phù hợp hơn.
+Rủi ro:
+•	dữ liệu lịch sử không còn đại diện 
+Vì:
+•	sản phẩm khác 
+•	khách khác 
+•	kênh khác 
+•	thông điệp khác 
+=> data distribution shift.
+Hậu quả:
+•	mô hình dự đoán sai 
+Giải pháp:
+•	thu thập dữ liệu pilot 
+•	fine-tune model 
+•	retrain bằng dữ liệu mới 
+•	test nhỏ trước khi rollout lớn 
+
+Câu 16 — Có nên xóa outlier?
+Trong dữ liệu bồi thường bảo hiểm, có một số hồ sơ yêu cầu bồi thường với số tiền rất lớn so với phần còn lại. Nhân viên đề xuất xóa toàn bộ các giá trị này vì cho rằng đó là dữ liệu ngoại lai (Outlier). Anh/chị có đồng ý không? Hãy phân tích khi nào nên xóa, khi nào nên giữ và khi nào cần xử lý theo cách khác.
+Không nên xóa tất cả.
+Cần phân biệt:
+•	lỗi dữ liệu 
+•	hay giá trị hiếm nhưng thật 
+Ví dụ:
+bồi thường rất lớn có thể là:
+•	gian lận 
+•	hoặc tai nạn nghiêm trọng thật 
+Nếu xóa hết:
+→ mất thông tin quan trọng.
+Giải pháp:
+•	xác minh nguồn dữ liệu 
+•	log transform 
+•	winsorize 
+•	dùng robust model 
+
+Câu 17 — Thiếu dữ liệu khoảng cách trung tâm
+Một tập dữ liệu giá nhà thiếu thông tin về khoảng cách tới trung tâm thành phố ở 40% số dòng. Đây lại là biến được cho là rất quan trọng. Anh/chị sẽ xử lý vấn đề này như thế nào? Hãy so sánh các lựa chọn như xóa dòng, điền giá trị thiếu (Missing Value Imputation), bổ sung dữ liệu từ nguồn khác hoặc thay thế bằng biến liên quan.
+Thiếu 40% là rất lớn.
+Các lựa chọn:
+1. Xóa dòng
+Ưu:
+•	đơn giản 
+Nhược:
+•	mất nhiều dữ liệu 
+•	bias nếu dữ liệu thiếu không ngẫu nhiên 
+2. Imputation
+Ví dụ:
+•	mean 
+•	median 
+•	KNN 
+Ưu:
+•	giữ dữ liệu 
+Nhược:
+•	tạo nhiễu nếu điền sai 
+3. Lấy từ nguồn khác
+Tốt hơn nhưng:
+•	tốn chi phí 
+
+4. Dùng biến thay thế
+Ví dụ:
+•	thời gian di chuyển 
+•	khu vực 
+•	khoảng cách tới ga tàu 
+Giải pháp tốt nhất:
+phụ thuộc nguyên nhân missing.
+
+Câu 18 — Dùng điểm giữa kỳ để cảnh báo sớm
+Một trường học muốn dự đoán sinh viên có nguy cơ trượt môn. Dữ liệu điểm giữa kỳ có khả năng dự đoán rất tốt kết quả cuối kỳ, nhưng điểm giữa kỳ chỉ có sau nửa học kỳ. Nếu mục tiêu là cảnh báo sớm ngay từ tuần thứ 2, anh/chị có nên dùng biến này không? Hãy phân tích sự phù hợp giữa thời điểm có dữ liệu và mục tiêu dự đoán.
+Không phù hợp nếu:
+mục tiêu là cảnh báo từ tuần 2.
+Vì:
+điểm giữa kỳ chỉ xuất hiện sau nửa học kỳ.
+Đây là:
+time leakage.
+Mô hình có thể:
+•	rất chính xác 
+•	nhưng vô dụng thực tế 
+Giải pháp:
+•	chỉ dùng dữ liệu có sẵn tại thời điểm dự đoán 
+•	xây nhiều model theo từng giai đoạn học 
+
+Câu 19 — Dữ liệu bệnh viện từ nhiều khoa
+Một bệnh viện có dữ liệu bệnh nhân từ nhiều khoa khác nhau. Một số khoa nhập dữ liệu rất đầy đủ, một số khoa nhập thiếu nhiều thông tin. Nếu xây dựng mô hình AI trên toàn bộ dữ liệu này, anh/chị dự đoán có thể gặp những vấn đề gì? Hãy đề xuất cách kiểm tra chất lượng dữ liệu theo từng nguồn phát sinh dữ liệu.
+Vấn đề:
+•	chất lượng nhập liệu không đồng đều 
+•	missing data khác nhau 
+•	format khác nhau 
+Hậu quả:
+•	model bias 
+•	học sai pattern 
+•	dự đoán thiếu ổn định 
+Cần kiểm tra:
+•	missing rate theo khoa 
+•	consistency 
+•	label quality 
+•	duplicate 
+•	outlier 
+Giải pháp:
+•	chuẩn hóa dữ liệu 
+•	đánh giá chất lượng từng nguồn 
+•	có pipeline kiểm tra dữ liệu 
+
+Câu 20 — Data Distribution Shift giữa nội thành và nông thôn
+Một mô hình dự đoán thời gian giao hàng được huấn luyện trên dữ liệu của khu vực nội thành. Khi áp dụng sang khu vực nông thôn, mô hình dự đoán kém chính xác. Anh/chị hãy phân tích vấn đề khác biệt phân phối dữ liệu (Data Distribution Shift) và đề xuất các bước cần làm trước khi triển khai mô hình sang khu vực mới.
+Mô hình train ở nội thành:
+•	đường tốt 
+•	mật độ cao 
+•	khoảng cách ngắn 
+Khi dùng ở nông thôn:
+•	đường xa 
+•	giao thông khác 
+•	ít shipper 
+•	hành vi khác 
+=> phân phối dữ liệu thay đổi.
+Hậu quả:
+•	model dự đoán sai 
+Giải pháp:
+•	kiểm tra distribution shift 
+•	thu thập dữ liệu khu vực mới 
+•	retrain/fine-tune 
+•	pilot test trước rollout 
+•	monitor sau triển khai
+
