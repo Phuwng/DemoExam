@@ -9,7 +9,7 @@ DB_NAME = "ShoppingDB.db"
 # ================== Câu 1 ==================
 @app.route('/')
 def index():
-    return "1_TranPhuongDuy_1"   # sửa lại thông tin của anh
+    return "1_TranPhuongDuy_1"   
 
 # ================== DB connect ==================
 def get_db():
