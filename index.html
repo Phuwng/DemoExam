@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <h2>Customer List</h2>
+    <ul id="list"></ul>
+
+    <script>
+        fetch('/Customers')
+        .then(res => res.json())
+        .then(data => {
+            let html = '';
+            data.forEach(c => {
+                html += `<li>${c.first_name} - ${c.email}</li>`;
+            });
+            document.getElementById('list').innerHTML = html;
+        });
+    </script>
+</body>
+</html>
